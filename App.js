@@ -20,6 +20,9 @@ import AccelerometerSensor from './components/AccelerometerSensor';
 import BarcodeScannerExample from './components/BarcodeScannerExample';
 import GyroscopeSensor from './components/GyroscopeSensor';
 
+import I18n from './I18n';
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -33,11 +36,32 @@ class Home extends Component {
   static navigationOptions = {
     title: 'Home',
   };
+
+  async componentWillMount() {
+   await I18n.initAsync();
+ }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>This is an API demo app for Expo</Text>
+        <Text>{I18n.t('GettingStarted')}</Text>
+
+        <View style={{flexDirection: 'row'}}>
+          <Button
+           title="EN"
+           onPress={ () => {I18n.locale = 'en'; this.forceUpdate(); } }
+         />
+         <Button
+          title="䌓"
+          onPress={ () => {I18n.locale = 'zh'; this.forceUpdate(); } }
+        />
+        <Button
+         title="简"
+         onPress={ () => {I18n.locale = 'cn'; this.forceUpdate(); } }
+       />
+        </View>
+
         <Button
          title="Audio Demo"
          onPress={ () => {navigate('AudioDemo');} }
