@@ -33,6 +33,10 @@ export default class AudioDemo extends Component {
     title: 'AudioDemo',
   };
 
+  async componentWillMount() {
+    await Audio.setIsEnabledAsync(true);
+  }
+
   componentWillUnmount() {
     this.stopMusic();
  }
@@ -51,7 +55,7 @@ export default class AudioDemo extends Component {
   }
 
   async playMusic() {
-      await Audio.setIsEnabledAsync(true);
+
 
       if ( this.sound ) {
         await this.sound.playAsync();

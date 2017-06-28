@@ -9,7 +9,17 @@ import {
 
 import { StackNavigator } from 'react-navigation';
 
-import { Audio } from 'expo';
+import { Audio, Font } from 'expo';
+import {
+  Ionicons,
+  Entypo,
+  FontAwesome,
+  Foundation,
+  MaterialIcons,
+  MaterialCommunityIcons,
+  SimpleLineIcons,
+  Octicons,
+} from '@expo/vector-icons';
 
 import AudioDemo from './components/AudioDemo';
 import AudioRecording from './components/AudioRecording';
@@ -19,6 +29,7 @@ import MapViewDemo from './components/MapViewDemo';
 import AccelerometerSensor from './components/AccelerometerSensor';
 import BarcodeScannerExample from './components/BarcodeScannerExample';
 import GyroscopeSensor from './components/GyroscopeSensor';
+import NativeBaseDemo from './components/NativeBaseDemo';
 
 import I18n from './I18n';
 
@@ -39,6 +50,12 @@ class Home extends Component {
 
   async componentWillMount() {
    await I18n.initAsync();
+
+   // For native-base
+   await Font.loadAsync({
+    'Roboto': require('native-base/Fonts/Roboto.ttf'),
+    'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+  });
  }
 
   render() {
@@ -60,7 +77,25 @@ class Home extends Component {
          title="简"
          onPress={ () => {I18n.locale = 'cn'; this.forceUpdate(); } }
        />
+
+
         </View>
+
+        <View style={{flexDirection: 'row'}}>
+          <Ionicons name="md-checkmark-circle" size={32} color="green" />
+          <Entypo name="github-with-circle" size={32} color="red" />
+          <FontAwesome name="info-circle" size={32} color="blue" />
+          <Foundation name="bitcoin-circle" size={32} />
+          <MaterialIcons name="account-circle" size={32} />
+          <MaterialCommunityIcons name="account-circle" size={32} />
+          <SimpleLineIcons name="arrow-up-circle" size={32} />
+          <Octicons name="circle-slash" size={32} />
+        </View>
+
+        <Button
+         title="NativeBaseDemo"
+         onPress={ () => {navigate('NativeBaseDemo');} }
+       />
 
         <Button
          title="Audio Demo"
@@ -127,6 +162,9 @@ const MainNavigator = StackNavigator({
     },
     GyroscopeSensor: {
       screen: GyroscopeSensor,
+    },
+    NativeBaseDemo: {
+      screen: NativeBaseDemo,
     },
   },
   {
